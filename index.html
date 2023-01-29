@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="main">
+    <form action="" method="post" class="form" id="form-1">
+      <h2 class="heading">Register Form</h2>
+      <p class="desc">Cùng nhau học tập tại F8 ❤️</p>
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Name..." class="form-control">
+        <span class="form-msg"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email address" class="form-control">
+        <span class="form-msg"></span>
+      </div>
+
+      <div class="form-group password-form">
+        <label for="password" class="form-label">Create Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+        <span class="form-msg"></span>
+      </div>
+
+      <div class="form-group password-confirmation-form">
+        <label for="password-confirmation" class="form-label">Confirm Password</label>
+        <input type="password" id="password-confirmation" name="password-confirmation" placeholder="Confirm password" class="form-control">
+        <span class="form-msg"></span>
+      </div>
+
+      <button class="form-submit">Register</button>
+    </form>
+
+
+  </div>
+</body>
+<script src="./validator.js"></script>
+<script>
+  Validator({
+    form: '#form-1',
+    errorElement: '.form-msg',
+    rules: [
+      Validator.isRequired('#fullname', 'Please enter your full name!'),
+      Validator.isRequired('#email'),
+      Validator.isEmail('#email'),
+      Validator.isRequired('#password'),
+      Validator.minLength('#password', 6),
+      Validator.isConfirmed('#password-confirmation', () => {
+        return document.querySelector('#form-1').querySelector('#password').value;
+      }, ),
+      Validator.isRequired('#password-confirmation'),
+      
+    ],
+    onSubmit: (data) => {
+      console.table(data);
+    }
+  });
+</script>
+</html>
